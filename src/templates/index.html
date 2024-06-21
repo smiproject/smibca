@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Price Prediction</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            background: url('https://source.unsplash.com/1600x900/?house,home') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+            padding: 40px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        h2 {
+            margin-bottom: 30px;
+            color: #333;
+            text-align: center;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            font-size: 18px;
+            padding: 10px 20px;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+        .form-group label {
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .form-control {
+            border-radius: 10px;
+        }
+        .icon {
+            color: #007bff;
+            font-size: 50px;
+            text-align: center;
+            display: block;
+            margin-bottom: 20px;
+        }
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <i class="fas fa-home icon"></i>
+        <h2>House Price Prediction</h2>
+        <form action="/predict" method="post">
+            <div class="form-group">
+                <label for="location">Location</label>
+                <select class="form-control" name="location" id="location" required>
+                    <option value="" disabled selected>Select a location</option>
+                    {% for location in locations %}
+                        <option value="{{ location }}">{{ location }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="total_sqft">Total Square Feet</label>
+                <input type="text" class="form-control" name="total_sqft" id="total_sqft" placeholder="Enter total square feet" required>
+            </div>
+            <div class="form-group">
+                <label for="bath">Number of Bathrooms</label>
+                <input type="text" class="form-control" name="bath" id="bath" placeholder="Enter number of bathrooms" required>
+            </div>
+            <div class="form-group">
+                <label for="balcony">Number of Balconies</label>
+                <input type="text" class="form-control" name="balcony" id="balcony" placeholder="Enter number of balconies" required>
+            </div>
+            <div class="form-group">
+                <label for="bhk">Number of Bedrooms</label>
+                <input type="text" class="form-control" name="bhk" id="bhk" placeholder="Enter number of bedrooms" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Predict</button>
+        </form>
+        {% if prediction_text %}
+            <h3 class="mt-4 text-center text-success">{{ prediction_text }}</h3>
+        {% endif %}
+    </div>
+    <footer>
+        <p>&copy; 2024 House Price Predictor</p>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
